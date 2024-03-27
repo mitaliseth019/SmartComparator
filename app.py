@@ -1,14 +1,16 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import json
-
+import Product
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'
 db = SQLAlchemy(app)
 
-class Product(db.Model):
+
+
+class ProductDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     description = db.Column(db.Text)
@@ -17,9 +19,9 @@ class Product(db.Model):
 
 db.create_all()
 
-# Add data to the Product database
+# Add data to the ProductDB database
 def add_product(name, description, features, price):
-    product = Product(name=name, description=description, features=features, price=price)
+    product = ProductDB(name=name, description=description, features=features, price=price)
     db.session.add(product)
     db.session.commit()
 
@@ -40,7 +42,7 @@ for data in product_data:
     add_product(data['name'], data['description'], data['features'], data['price'])    
 
 # Deserialize the string back to a list when retrieving it from the database
-retrieved_product = Product.query.filter_by(name='iPhone 12').first()
+retrieved_product = ProductDB.query.filter_by(name='iPhone 12').first()
 print("retrieved_product  ", retrieved_product)
 retrieved_features_json = retrieved_product.features
 retrieved_features_list = json.loads(retrieved_features_json)
