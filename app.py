@@ -42,11 +42,14 @@ def get_product():
 
 @app.route('/getFeatureDetails', methods=['GET'])
 def get_feature():
+    res = {}
     featureKey = request.args.get('feature')
     feature1 = request.args.get('featureProd1')
     feature2 = request.args.get('featureProd2')
     gpt = GPTModelClient()
-
+    user_input = "{} {} vs {} explain this to non tech person as short as possible. Please stick to context. Also please don't echo back the user input without adding any accompanying text.".format(featureKey, feature1, feature2)
+    res = {featureKey : gpt.query_gpt(user_input)}
+    return json.dumps(res)
 
 if __name__ == '__main__':
     app.run(debug=True)
