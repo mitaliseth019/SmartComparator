@@ -21,14 +21,17 @@ def get_product():
     if product_id1 is None or product_id2 is None:
         return jsonify({'error': 'Both product_id and product_name are required'}), 400
     
-    retrieved_product = Repository.getProduct(product_id1)
-
-    if retrieved_product:
-        print("retrieved_product  ", retrieved_product)
-        product = Product(id=retrieved_product.productId, name=retrieved_product.name, features=json.loads(retrieved_product.features), price=retrieved_product.price)
-        print("product retived  ",product)
-        print("product json  ",jsonify(product.__dict__))
-        return jsonify(product.__dict__)
-
+    retrieved_product1 = Repository.getProduct(product_id1)
+    retrieved_product2 = Repository.getProduct(product_id2)
+    result = []
+    if retrieved_product1:
+        print("retrieved_product1  ", retrieved_product1)
+        product1 = Product(id=retrieved_product1.productId, name=retrieved_product1.name, features=json.loads(retrieved_product1.features), price=retrieved_product1.price)
+        result.append(product1)
+    if retrieved_product2:
+        print("retrieved_product2  ", retrieved_product2)
+        product2 = Product(id=retrieved_product2.productId, name=retrieved_product2.name, features=json.loads(retrieved_product2.features), price=retrieved_product2.price)
+        result.append(product2)
+    return json.dumps([res.__dict__ for res in result])
 if __name__ == '__main__':
     app.run(debug=True)

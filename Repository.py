@@ -32,10 +32,19 @@ def add_or_update_product(productId, name, description, features, price):
     db.session.commit()
 
 # Example data
-features_list1 = ["iOS", "6.1-inch Super Retina XDR display", "A14 Bionic chip", "Dual-camera system", "Face ID", "Ceramic Shield front cover", "Water and dust resistant (IP68)", "5G capable", "Wireless charging", "Available in multiple colors"]
+features_list1 = {"Operating_System": "iOS", "Display_Size": "6.1-inch Super Retina XDR display", 
+     "Processor": "A14 Bionic chip", "Camera": "Dual-camera system", 
+     "Security": "Face ID", "Design": "Ceramic Shield front cover", 
+     "Durability": "Water and dust resistant (IP68)", "Connectivity": "5G capable", 
+     "Charging": "Wireless charging", "Color_Options": "Available in multiple colors"}
 features_json1 = json.dumps(features_list1)
 
-features_list2 = ["Android", "6.2-inch Quad HD+ Dynamic AMOLED display", "Snapdragon 865 processor", "Triple-camera system", "Ultrasonic fingerprint sensor", "Wireless PowerShare", "IP68 water and dust resistance", "5G capable", "Fast charging", "Expandable storage"]
+features_list2 = {"Operating_System": "Android", "Display_Size": "6.2-inch Quad HD+ Dynamic AMOLED display", 
+     "Processor": "Snapdragon 865 processor", "Camera": "Triple-camera system", 
+     "Security": "Ultrasonic fingerprint sensor", "Connectivity": "5G capable", 
+     "Special_Features": "Wireless PowerShare", 
+     "Durability": "IP68 water and dust resistance", 
+     "Charging": "Fast charging", "Storage_Options": "Expandable storage"}
 features_json2 = json.dumps(features_list2)
 product_data = [
     {"productId": "prod123", "name": "iPhone 12", "description": "Apple smartphone", "features": features_json1, "price": 100},
