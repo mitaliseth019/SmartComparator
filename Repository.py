@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask import Flask
+import pandas as pd
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///product.db'
@@ -32,28 +33,29 @@ def add_or_update_product(productId, name, description, features, price):
     db.session.commit()
 
 # Example data
-features_list1 = {"Operating_System": "iOS", "Display_Size": "6.1-inch Super Retina XDR display", 
-     "Processor": "A14 Bionic chip", "Camera": "Dual-camera system", 
-     "Security": "Face ID", "Design": "Ceramic Shield front cover", 
-     "Durability": "Water and dust resistant (IP68)", "Connectivity": "5G capable", 
-     "Charging": "Wireless charging", "Color_Options": "Available in multiple colors"}
-features_json1 = json.dumps(features_list1)
+# features_list1 = {"Operating_System": "iOS", "Display_Size": "6.1-inch Super Retina XDR display", 
+#      "Processor": "A14 Bionic chip", "Camera": "Dual-camera system", 
+#      "Security": "Face ID", "Design": "Ceramic Shield front cover", 
+#      "Durability": "Water and dust resistant (IP68)", "Connectivity": "5G capable", 
+#      "Charging": "Wireless charging", "Color_Options": "Available in multiple colors"}
+# features_json1 = json.dumps(features_list1)
 
-features_list2 = {"Operating_System": "Android", "Display_Size": "6.2-inch Quad HD+ Dynamic AMOLED display", 
-     "Processor": "Snapdragon 865 processor", "Camera": "Triple-camera system", 
-     "Security": "Ultrasonic fingerprint sensor", "Connectivity": "5G capable", 
-     "Special_Features": "Wireless PowerShare", 
-     "Durability": "IP68 water and dust resistance", 
-     "Charging": "Fast charging", "Storage_Options": "Expandable storage"}
-features_json2 = json.dumps(features_list2)
-product_data = [
-    {"productId": "prod123", "name": "iPhone 12", "description": "Apple smartphone", "features": features_json1, "price": 100},
-    {"productId": "prod234","name": "Samsung Galaxy S20", "description": "Android smartphone", "features": features_json2, "price": 150}
-]
+# features_list2 = {"Operating_System": "Android", "Display_Size": "6.2-inch Quad HD+ Dynamic AMOLED display", 
+#      "Processor": "Snapdragon 865 processor", "Camera": "Triple-camera system", 
+#      "Security": "Ultrasonic fingerprint sensor", "Connectivity": "5G capable", 
+#      "Special_Features": "Wireless PowerShare", 
+#      "Durability": "IP68 water and dust resistance", 
+#      "Charging": "Fast charging", "Storage_Options": "Expandable storage"}
+# features_json2 = json.dumps(features_list2)
+# product_data = [
+#     {"productId": "prod123", "name": "iPhone 12", "description": "Apple smartphone", "features": features_json1, "price": 100},
+#     {"productId": "prod234","name": "Samsung Galaxy S20", "description": "Android smartphone", "features": features_json2, "price": 150}
+# ]
 
+product_df=pd.read_csv('products1.csv')
 # Add example data to the database
-for data in product_data:
-    add_or_update_product(data['productId'], data['name'], data['description'], data['features'], data['price'])  
+for data in product_df:
+    add_or_update_product(data['ProductId'], data['Product_Name'], data['Desc'], data['selected_features'], data['Price'],data['Review'])  
 
 print("productId  ",ProductDB.query.filter_by(productId="prod123").first())
 
