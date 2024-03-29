@@ -60,7 +60,7 @@ def get_feature():
         return jsonify({'error': 'Both product should be of similar type'}), 400
     gpt = GPTModelClient()
     print("retrieved_product1.productType  ",retrieved_product1.productType)
-    user_input = "{} {} vs {} explain this in context of {} to non tech person as short as possible. Please stick to context. Also please don't echo back the user input without adding any accompanying text".format(featureKey, feature_prod1, feature_prod2, retrieved_product1.productType)
+    user_input = "{} {} vs {} explain this in context of {} to non tech person as short as possible (in 3 lines). Please stick to context. Also please don't echo back the user input without adding any accompanying text".format(featureKey, feature_prod1, feature_prod2, retrieved_product1.productType)
     res = {featureKey : gpt.query_gpt(user_input)}
     return json.dumps(res)
 

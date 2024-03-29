@@ -5,7 +5,7 @@ class GPTModelClient:
         self.gpt_endpoint = 'https://wmtllmgateway.stage.walmart.com/wmtllmgateway/v1/openai'
         self.gpt_headers = {
             'Content-Type': 'application/json',
-            'X-Api-Key': 'eyJzZ252ZXIiOiIxIiwiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiIzOCIsInN1YiI6IjIxNCIsImlzcyI6IldNVExMTUdBVEVXQVktU1RHIiwiYWN0IjoiYTBiMGl5YiIsInR5cGUiOiJBUFAiLCJpYXQiOjE3MTAyNjI0OTAsImV4cCI6MTcyNTgxNDQ5MH0.WDv2W07AhjF_zvM_SX2OiLXUzf4ORmA7YD723nj_GjI',  # Replace with your API key
+            'X-Api-Key': '# Replace with your API key'
         }
         self.gpt_parameters = {
             'model': model,
